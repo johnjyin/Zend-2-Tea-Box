@@ -1,0 +1,15 @@
+<?php
+$title = 'Tea Box';
+$this->headTitle($title);
+?>
+<div class="row">
+	<?php foreach ($teas as $tea) : ?>
+	<div class="col-sm-4 col-md-3">
+		<a href="<?php echo $this->url('tea', array('action'=>'edit', 
+			'id' => $tea->id));?>" class="thumbnail">
+			<img src="../img/<?php echo $this->escapeHtml($tea->picture); ?>" 
+				alt="<?php echo $this->escapeHtml($tea->name);?>">
+		</a>
+	</div>
+	<?php endforeach; ?>
+</div>
