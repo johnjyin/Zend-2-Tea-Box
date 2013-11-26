@@ -11,4 +11,5 @@ The 1st part of this tutorial is in synchronization with the ZF2's offical tutor
 
 
 <img src="Tea%20Box%20Index.jpg"></img>
-<img src="Add%20Tea.jpg"></img>
+<img src="Add%20New%20Tea.jpg"></img>
+<img src="Edit%20Tea.jpg"></img>
