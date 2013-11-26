@@ -9,6 +9,7 @@ $form->setAttribute('action', $this->url('tea', array('action' => 'add')));
 $form->setAttribute('role', 'form');
 $form->prepare();
 
+echo $this->form()->openTag($form);
 foreach ($form as $element) :?>
 	<div class="form-group">
 		<?php 
@@ -20,7 +21,7 @@ foreach ($form as $element) :?>
 		<?php if ($name == 'id') { ?>
 			<div class="hidden"><?php echo $this->formElement($element); ?></div>
 		<?php } else if ($name == 'submit') { ?>
-			<input class='btn' name='submit' type='submit' value='Add'>
+			<input class='btn btn-default' name='submit' type='submit' value='Add'>
 		<?php } else if ($label != '') { ?>
 			<label class="control-label"><?php echo $label ?></label>
 			<input class='form-control' name='<?php echo $name ?>' type='<?php echo $type ?>'>

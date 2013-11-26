@@ -6,22 +6,36 @@ $this->headTitle($title);
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url(
-    'album',
+    'tea',
     array(
         'action' => 'edit',
         'id'     => $this->id,
     )
 ));
+$form->setAttribute('role', 'form');
 $form->prepare();
 
 echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('id'));
-echo $this->formRow($form->get('brand'));
-echo $this->formRow($form->get('name'));
-echo $this->formRow($form->get('serving'));
-echo $this->formRow($form->get('servings'));
-echo $this->formRow($form->get('ingredients'));
-echo $this->formRow($form->get('description'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+foreach ($form as $element) :?>
+	<div class="form-group">
+		<?php 
+			if ($element->getOption('required')) { $req = 'required'; }
+			$type = $element->getAttribute('type');
+			$name = $element->getAttribute('name'); 
+			$label = $element->getLabel();
+		?>
+		<?php if ($name == 'id') { ?>
+			<div class="hidden"><?php echo $this->formElement($element); ?></div>
+		<?php } else if ($name == 'submit') { ?>
+			<input type='submit' class='btn btn-default' name='submit' value="Submit">
+			<a type='button' class='btn btn-danger' href=
+				'<?php echo $this->url('tea', array('action'=>'delete', 'id'=>$this->id,)); ?>'>Delete</a>
+		<?php } else if ($label != '') { ?>
+			<label class="control-label"><?php echo $label ?></label>
+			<input class='form-control' name='<?php echo $name ?>' type='<?php echo $type ?>'
+				value='<?php echo $element->getValue() ?>'>
+		<?php } ?> 
+	</div>
+<?php 
+endforeach;
 ?>

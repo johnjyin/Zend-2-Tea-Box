@@ -25,9 +25,16 @@ class Tea implements InputFilterAwareInterface
         $this->brand   = (isset($data['brand']))   ? $data['brand']   : null;
         $this->name    = (isset($data['name']))    ? $data['name']    : null;
 		$this->serving = (isset($data['serving'])) ? $data['serving'] : null;
+		$this->servings    = (isset($data['servings']))     ? $data['servings']     : null;
 		$this->ingredients = (isset($data['ingredients'])) ? $data['ingredients'] : null;
 		$this->description = (isset($data['description'])) ? $data['description'] : null;
 		$this->picture     = (isset($data['picture']))     ? $data['picture']     : null;
+    }
+	
+	/** hydrator method used when Edit Tea **/
+	public function getArrayCopy()
+    {
+        return get_object_vars($this);
     }
 
     // Add content to these methods:
@@ -89,6 +96,7 @@ class Tea implements InputFilterAwareInterface
 
             $inputFilter->add(array(
                 'name'     => 'serving',
+				'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -102,6 +110,14 @@ class Tea implements InputFilterAwareInterface
                             'max'      => 50,
                         ),
                     ),
+                ),
+            ));
+			
+            $inputFilter->add(array(
+                'name'     => 'servings',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
                 ),
             ));
 
